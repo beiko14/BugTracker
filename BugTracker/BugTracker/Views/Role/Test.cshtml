@@ -1,0 +1,138 @@
+﻿@model BugTracker.Models.UserModel
+
+@{
+    ViewData["Title"] = "Rollenzuweisung";
+}
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 style="padding-bottom:30px" class="h3 mb-2 text-gray-800">Rollen anpassen</h1>
+
+            <div class="row">
+                <div class="col-lg-3">
+
+                    <form asp-action="ProcessEditUserRole">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="EmailAddress" class="control-label"></label>
+                            <select asp-for="EmailAddress" multiple class="form-control" size="10">
+                                @foreach (string item in Model.EmailList)
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </select>
+                            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Role" class="control-label"></label>
+                            <select asp-for="Role" class="custom-select">
+                                <option hidden disabled selected> - wählen Sie eine Option - </option>
+                                <option value="Admin">Admin</option>
+                                <option value="Developer">Developer</option>
+                            </select>
+                            <span asp-validation-for="Role" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Rolle bestimmen" class="btn btn-primary" />
+                        </div>
+                    </form>
+
+                </div>
+                <div class="col-lg-9">
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Nutzer</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Email-Adresse</th>
+                                            <th>Vorname</th>
+                                            <th>Nachname</th>
+                                            <th>Geburtsdatum</th>
+                                            <th>Role</th>
+                                            <th>Telefonnummer</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (UserModel item in Model.UserModelList)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.LastName)
+                                                </td>
+                                                <td>
+                                                    @{
+                                                        string date = item.BirthDate.ToString("dd.MM.yyyy");
+                                                    }
+                                                    @Html.DisplayFor(modelItem => date)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Role)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("Bearbeiten", "Edit", new { id = item.UserId })
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+</div>
+<!-- End of Content Wrapper -->
+<!-- Page level plugins -->
+<script src="~/theme/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="~/theme/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="~/theme/js/datatable-searchUnSo.js"></script>
+
+<!-- Custom styles for this page -->
+<link href="~/theme/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

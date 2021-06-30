@@ -1,0 +1,126 @@
+﻿@model BugTracker.Models.UserModel
+
+@{
+    ViewData["Title"] = "Benutzerprofil";
+}
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">Benutzerprofil</h1>
+            <p class="mb-4">
+                Hier können Sie Informationen über sich hinzufügen oder bearbeiten.
+            </p>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <!-- Basic Card Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Profil</h6>
+                        </div>
+                        <div class="card-body">
+
+
+                            <div class="text-center">
+                                <p>
+                                    <img src="@Model.ProfileImage" alt="" class="img-rounded img-responsive" />
+                                </p>
+                                <p>
+                                    @Model.FirstName
+                                    @Model.LastName
+                                </p>
+                                <a href="@Url.Action("Edit", "Account", new { id = Model.UserId })" class="btn btn-primary btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-pen"></i>
+                                    </span>
+                                    <span class="text">Profil bearbeiten</span>
+                                </a>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <!-- Basic Card Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Mehr Informationen</h6>
+                        </div>
+                        <div class="card-body">
+
+
+                            <dl class="row">
+                                <div class="col-sm-3">
+                                    <dt>Vorname</dt>
+                                    <hr />
+                                </div>
+                                <div class="col-sm-9">
+                                    <dd>@Model.FirstName &nbsp;</dd>
+                                    <hr />
+                                </div>
+                                <div class="col-sm-3">
+                                    <dt>Nachname</dt>
+                                    <hr />
+                                </div>
+                                <div class="col-sm-9">
+                                    <dd>@Model.LastName &nbsp;</dd>
+                                    <hr />
+                                </div>
+                                <div class="col-sm-3">
+                                    <dt>Email</dt>
+                                    <hr />
+                                </div>
+                                <div class="col-sm-9">
+                                    <dd>@Model.EmailAddress &nbsp;</dd>
+                                    <hr />
+                                </div>
+                                <div class="col-sm-3">
+                                    <dt>Telefonnummer</dt>
+                                    <hr />
+                                </div>
+                                <div class="col-sm-9">
+                                    <dd>@Model.PhoneNumber &nbsp;</dd>
+                                    <hr />
+                                </div>
+                                <div class="col-sm-3">
+                                    <dt>Geburtsdatum</dt>
+                                    <hr />
+                                </div>
+                                <div class="col-sm-9">
+                                    <dd>
+                                        @{
+                                            string date = Model.BirthDate.ToString("dd.MM.yyyy");
+                                        }
+                                        @date &nbsp;
+                                    </dd>
+                                    <hr />
+                                </div>
+                            </dl>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+</div>
+<!-- End of Content Wrapper -->
